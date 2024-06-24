@@ -24,3 +24,4 @@ func _physics_process(delta):
 		actor.velocity=Vector2.ZERO
 		anim_state.travel("idle")
 	actor.move_and_slide()
+
