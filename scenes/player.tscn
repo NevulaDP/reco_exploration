@@ -331,7 +331,8 @@ states/walk/position = Vector2(496, 228)
 transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition_lok0l"), "idle", "walk", SubResource("AnimationNodeStateMachineTransition_13v11"), "walk", "idle", SubResource("AnimationNodeStateMachineTransition_5vo3j")]
 graph_offset = Vector2(47, 11)
 
-[node name="Player" type="CharacterBody2D"]
+[node name="Player" type="CharacterBody2D" groups=["player"]]
+collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 5

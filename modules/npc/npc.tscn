@@ -1,0 +1,33 @@
+[gd_scene load_steps=6 format=3 uid="uid://bmmfbgl5gwnn8"]
+
+[ext_resource type="Texture2D" uid="uid://bgbfhmk3qlp5" path="res://Assets/Sprites/Characters/chara8.png" id="1_5kg24"]
+[ext_resource type="PackedScene" uid="uid://b73m75ipadxqa" path="res://modules/interaction/interaction_area/interaction_area.tscn" id="3_dov1d"]
+[ext_resource type="Script" path="res://modules/npc/interact_npc.gd" id="3_v066x"]
+
+[sub_resource type="CapsuleShape2D" id="CapsuleShape2D_at2xx"]
+radius = 9.0
+height = 18.0
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_x2e37"]
+radius = 36.0555
+
+[node name="Npc" type="CharacterBody2D"]
+collision_mask = 2
+script = ExtResource("3_v066x")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture_filter = 5
+texture = ExtResource("1_5kg24")
+hframes = 12
+vframes = 8
+frame = 55
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, 5)
+shape = SubResource("CapsuleShape2D_at2xx")
+
+[node name="InteractionArea" parent="." instance=ExtResource("3_dov1d")]
+collision_layer = 1
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
+shape = SubResource("CircleShape2D_x2e37")
