@@ -1,8 +1,14 @@
-[gd_scene load_steps=6 format=3 uid="uid://bmmfbgl5gwnn8"]
+[gd_scene load_steps=12 format=3 uid="uid://bmmfbgl5gwnn8"]
 
 [ext_resource type="Texture2D" uid="uid://bgbfhmk3qlp5" path="res://Assets/Sprites/Characters/chara8.png" id="1_5kg24"]
 [ext_resource type="PackedScene" uid="uid://b73m75ipadxqa" path="res://modules/interaction/interaction_area/interaction_area.tscn" id="3_dov1d"]
 [ext_resource type="Script" path="res://modules/npc/interact_npc.gd" id="3_v066x"]
+[ext_resource type="Resource" path="res://dialogue/timelines/npc_ex.dtl" id="4_7lk5r"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/state_chart.gd" id="5_ljns3"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/compound_state.gd" id="6_kk6bt"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/atomic_state.gd" id="7_14qvg"]
+[ext_resource type="Script" path="res://addons/godot_state_charts/transition.gd" id="8_8lsg5"]
+[ext_resource type="Script" path="res://modules/interaction/dialogue/dialog_interact.gd" id="9_wfwj5"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_at2xx"]
 radius = 9.0
@@ -13,7 +19,6 @@ radius = 36.0555
 
 [node name="Npc" type="CharacterBody2D"]
 collision_mask = 2
-script = ExtResource("3_v066x")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 5
@@ -26,8 +31,44 @@ frame = 55
 position = Vector2(0, 5)
 shape = SubResource("CapsuleShape2D_at2xx")
 
+[node name="InteractNPC" type="Node2D" parent="."]
+script = ExtResource("3_v066x")
+timeline = ExtResource("4_7lk5r")
+
 [node name="InteractionArea" parent="." instance=ExtResource("3_dov1d")]
 collision_layer = 1
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractionArea"]
 shape = SubResource("CircleShape2D_x2e37")
+
+[node name="StateChart" type="Node" parent="."]
+script = ExtResource("5_ljns3")
+
+[node name="Root" type="Node" parent="StateChart"]
+script = ExtResource("6_kk6bt")
+initial_state = NodePath("Idle")
+
+[node name="Talking" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_14qvg")
+
+[node name="To Idle" type="Node" parent="StateChart/Root/Talking"]
+script = ExtResource("8_8lsg5")
+to = NodePath("../../Idle")
+event = &"chat_finish"
+delay_in_seconds = "0.0"
+
+[node name="Idle" type="Node" parent="StateChart/Root"]
+script = ExtResource("7_14qvg")
+
+[node name="To Talking" type="Node" parent="StateChart/Root/Idle"]
+script = ExtResource("8_8lsg5")
+to = NodePath("../../Talking")
+event = &"is_talking"
+delay_in_seconds = "0.0"
+
+[node name="DialogInteract" type="Node" parent="."]
+script = ExtResource("9_wfwj5")
+timeline = ExtResource("4_7lk5r")
+
+[connection signal="state_entered" from="StateChart/Root/Talking" to="DialogInteract" method="_on_talking_state_entered"]
+[connection signal="state_entered" from="StateChart/Root/Idle" to="InteractNPC" method="_on_idle_state_entered"]

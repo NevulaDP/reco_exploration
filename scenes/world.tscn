@@ -1,10 +1,9 @@
-[gd_scene load_steps=12 format=3 uid="uid://by65vo33vr4gb"]
+[gd_scene load_steps=11 format=3 uid="uid://by65vo33vr4gb"]
 
 [ext_resource type="PackedScene" uid="uid://dsges7x0rm0xx" path="res://scenes/player.tscn" id="1_8umvy"]
 [ext_resource type="Texture2D" uid="uid://bge6xgffm0h80" path="res://Assets/Enviornment/Tiles.png" id="1_j0ci5"]
 [ext_resource type="Texture2D" uid="uid://b7o60lhy0l1oe" path="res://Assets/Enviornment/Props.png" id="2_pkp42"]
 [ext_resource type="PackedScene" uid="uid://bmmfbgl5gwnn8" path="res://modules/npc/npc.tscn" id="4_dwcj4"]
-[ext_resource type="Resource" path="res://dialogue/timelines/npc_ex.dtl" id="4_qhyf4"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_0u46v"]
 texture = ExtResource("1_j0ci5")
@@ -1821,7 +1820,6 @@ layer_0/tile_data = PackedInt32Array(720921, 458752, 14, 786453, 655360, 2)
 [node name="Npc" parent="." instance=ExtResource("4_dwcj4")]
 y_sort_enabled = true
 position = Vector2(282, 228)
-timeline = ExtResource("4_qhyf4")
 
 [node name="Player" parent="." instance=ExtResource("1_8umvy")]
 position = Vector2(394, 191)
