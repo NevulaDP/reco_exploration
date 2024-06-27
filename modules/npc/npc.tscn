@@ -381,7 +381,7 @@ script = ExtResource("7_14qvg")
 script = ExtResource("8_8lsg5")
 to = NodePath("../../Idle")
 event = &"chat_finish"
-delay_in_seconds = "0.0"
+delay_in_seconds = "0"
 
 [node name="Idle" type="Node" parent="StateChart/Root"]
 script = ExtResource("7_14qvg")
