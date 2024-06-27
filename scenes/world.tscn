@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://by65vo33vr4gb"]
+[gd_scene load_steps=12 format=3 uid="uid://by65vo33vr4gb"]
 
 [ext_resource type="PackedScene" uid="uid://dsges7x0rm0xx" path="res://scenes/player.tscn" id="1_8umvy"]
 [ext_resource type="Texture2D" uid="uid://bge6xgffm0h80" path="res://Assets/Enviornment/Tiles.png" id="1_j0ci5"]
@@ -1784,6 +1784,12 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 2
 sources/0 = SubResource("TileSetAtlasSource_6akvq")
 
+[sub_resource type="Curve2D" id="Curve2D_mocsw"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, 215, 168, 0, 0, 0, 0, 215, 280, 0, 0, 0, 0, 303, 280, 0, 0, 0, 0, 267, 233, 0, 0, 0, 0, 215, 168)
+}
+point_count = 5
+
 [node name="World" type="Node2D"]
 y_sort_enabled = true
 
@@ -1817,15 +1823,27 @@ format = 2
 layer_0/y_sort_enabled = true
 layer_0/tile_data = PackedInt32Array(720921, 458752, 14, 786453, 655360, 2)
 
-[node name="Npc" parent="." instance=ExtResource("4_dwcj4")]
-y_sort_enabled = true
-position = Vector2(282, 228)
-
 [node name="Player" parent="." instance=ExtResource("1_8umvy")]
 position = Vector2(394, 191)
+motion_mode = 1
 
 [node name="Camera2D" type="Camera2D" parent="Player"]
 position = Vector2(-3, 7)
 zoom = Vector2(5, 5)
 position_smoothing_enabled = true
 position_smoothing_speed = 2.0
+
+[node name="Path2D" type="Path2D" parent="."]
+y_sort_enabled = true
+curve = SubResource("Curve2D_mocsw")
+
+[node name="PathFollow2D" type="PathFollow2D" parent="Path2D"]
+position = Vector2(215, 168)
+rotation = 1.5708
+rotates = false
+cubic_interp = false
+
+[node name="Npc" parent="Path2D/PathFollow2D" instance=ExtResource("4_dwcj4")]
+position = Vector2(-0.999996, 0)
+rotation = -1.5708
+motion_mode = 1

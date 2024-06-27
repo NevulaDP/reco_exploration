@@ -1,13 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://i30hlyfd1sb2"]
+[gd_scene load_steps=3 format=3 uid="uid://i30hlyfd1sb2"]
 
 [ext_resource type="Script" path="res://modules/interaction/interaction_area/InteractionManager.gd" id="1_thous"]
+[ext_resource type="FontFile" uid="uid://dxl2chj0w866g" path="res://Assets/fonts/POPPINS-MEDIUM.TTF" id="2_0rovs"]
 
 [node name="InteractionManager" type="Node2D"]
 script = ExtResource("1_thous")
 
 [node name="Label" type="Label" parent="."]
 z_index = 5
-texture_filter = 6
+texture_filter = 5
 anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
@@ -15,7 +16,8 @@ offset_left = -42.5
 offset_right = 42.5
 offset_bottom = 23.0
 grow_horizontal = 2
-theme_override_font_sizes/font_size = 10
+theme_override_fonts/font = ExtResource("2_0rovs")
+theme_override_font_sizes/font_size = 12
 text = "[E] Interact"
 horizontal_alignment = 1
 vertical_alignment = 1

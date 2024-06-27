@@ -18,6 +18,10 @@ func _ready():
 func _process(delta):
 	pass
 
+func _physics_process(delta):
+	pass
+
+	
 func _on_interact():
 	if has_dialogue:
 		state_chart_self.send_event("is_talking")
@@ -33,3 +37,4 @@ func _on_idle_state_entered():
 	InteractionManager.can_interact=true
 	var state_chart_player = get_tree().get_first_node_in_group("player").get_node("%StateChart")
 	state_chart_player.send_event("ended_talking")
+	
