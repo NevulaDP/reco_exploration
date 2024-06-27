@@ -336,6 +336,7 @@ transitions = ["Start", "idle", SubResource("AnimationNodeStateMachineTransition
 graph_offset = Vector2(47, 11)
 
 [node name="Player" type="CharacterBody2D" groups=["player"]]
+disable_mode = 1
 collision_layer = 2
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

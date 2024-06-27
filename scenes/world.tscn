@@ -1846,4 +1846,3 @@ cubic_interp = false
 [node name="Npc" parent="Path2D/PathFollow2D" instance=ExtResource("4_dwcj4")]
 position = Vector2(-0.999996, 0)
 rotation = -1.5708
-motion_mode = 1
